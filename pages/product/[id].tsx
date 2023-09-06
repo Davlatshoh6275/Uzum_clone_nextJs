@@ -20,7 +20,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const res = await fetch(
     "https://jsonplaceholder.typicode.com/users/" + params?.id
   );
-  // const res = await fetch("/api/hello/" + params?.id)
 
   const data = await res.json();
 

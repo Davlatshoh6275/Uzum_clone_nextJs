@@ -1,13 +1,21 @@
-import React from "react";
-import logo from "../styles/images/logo.png";
+import React, { useState, useEffect } from "react";
+import logo from  "../styles/images/logo.png";
 import Image from "next/image";
 import { BiUser } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import Link from "next/link";
+import img from "../public/img/kalonka.png";
 
 const Navbar: React.FC = () => {
+
+  const [data, setData] = useState<any[]>([])
+
+  useEffect(()=> {
+    setData(JSON.parse(localStorage.getItem("karzine") || "[]"))
+  }, [])
+
   return (
     <div
       className={` w-[90%] sm:px-4 flex  mx-auto items-center justify-center  h-20 border-solid border-0 gap-5 `}
@@ -37,15 +45,18 @@ const Navbar: React.FC = () => {
         <li className="flex gap-2 items-center text-xl font-medium ">
           <BiUser size="23px" /> Шахзод
         </li>
-        <Link href={"/liked"} >
+
+        <Link href={"/liked"}>
           <li className=" text-xl font-medium ">Избранное</li>
         </Link>
-        <li className=" flex text-xl font-medium gap-2 ">
-          Корзина{" "}
-          <span className="flex items-center justify-center border border-solid border-[#7000FF] w-7 h-7 rounded bg-[#7000FF] text-white ">
-            3
-          </span>
-        </li>
+        <Link href={"/carzin"}>
+          <li className=" flex text-xl font-medium gap-2 ">
+            Корзина{" "}
+            <span className="flex items-center justify-center border border-solid border-[#7000FF] w-7 h-7 rounded bg-[#7000FF] text-white ">
+              {data.length}
+            </span>
+          </li>
+        </Link>
       </ul>
     </div>
   );
