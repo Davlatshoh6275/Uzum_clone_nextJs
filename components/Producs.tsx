@@ -8,21 +8,32 @@ const Producs: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("./api/hello")
+    // fetch("./api/hello")
+    //   .then((res) => res.json())
+    //   .then((res) => setData(res.producs));
+    fetch("https://dummyjson.com/products")
       .then((res) => res.json())
-      .then((res) => setData(res.producs));
+      .then((res) => setData(res.products)
+      );
   }, []);
+
+  console.log(data);
+  
 
   return (
     <div className="w-[100%] m-0 mx-auto sm:px-4  md:px-10 lg:px-14 xl:px-24 ">
       <h1
         className={`text-black text-3xl  sm:text-3xl font-semibold mb-10 ${inter.className}`}
       >
-        Популярное
+        Smartphones
       </h1>
       <div className="grid grid-flow-row-dense sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5   p-4 gap-4 mb-5 ">
         {data.map((item) =>
-          item.category === "Популярное" ? <Item key={item.id} item={item} /> : ""
+          item.category === "smartphones" ? (
+            <Item key={item.id} item={item} />
+          ) : (
+            ""
+          )
         )}
       </div>
       <div className="flex items-center justify-center mb-10">
@@ -33,41 +44,72 @@ const Producs: React.FC = () => {
       <h1
         className={`text-black text-3xl font-semibold mb-10 ${inter.className}`}
       >
-        Спортивная одежда
+        Laptops
       </h1>
       <div className="grid grid-flow-row-dense sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5   p-4 gap-4 mb-5 ">
         {data.map((item) =>
-          item.category === "Спортивная одежда" ? <Item key={item.id} item={item} /> : ""
+          item.category === "laptops" ? (
+            <Item key={item.id} item={item} />
+          ) : (
+            ""
+          )
         )}
       </div>
+      
       <h1
-        className={`text-black text-3xl font-semibold  mb-10 ${inter.className}`}
+        className={`text-black text-3xl font-semibold mb-10 ${inter.className}`}
       >
-        Активный отдых
+        Fragrances
       </h1>
       <div className="grid grid-flow-row-dense sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5   p-4 gap-4 mb-5 ">
         {data.map((item) =>
-          item.category === "Активный отдых" ? <Item key={item.id} item={item} /> : ""
+          item.category === "fragrances" ? (
+            <Item key={item.id} item={item} />
+          ) : (
+            ""
+          )
         )}
       </div>
       <h1
         className={`text-black text-3xl font-semibold mb-10 ${inter.className}`}
       >
-        Спортивная одежда
+        Skincare
       </h1>
       <div className="grid grid-flow-row-dense sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5   p-4 gap-4 mb-5 ">
         {data.map((item) =>
-          item.category === "Спортивная одежда" ? <Item key={item.id} item={item} /> : ""
+          item.category === "skincare" ? (
+            <Item key={item.id} item={item} />
+          ) : (
+            ""
+          )
         )}
       </div>
       <h1
         className={`text-black text-3xl font-semibold mb-10 ${inter.className}`}
       >
-        Активный отдых
+        Groceries
       </h1>
       <div className="grid grid-flow-row-dense sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5   p-4 gap-4 mb-5 ">
         {data.map((item) =>
-          item.category === "Активный отдых" ? <Item key={item.id} item={item} /> : ""
+          item.category === "groceries" ? (
+            <Item key={item.id} item={item} />
+          ) : (
+            ""
+          )
+        )}
+      </div>
+      <h1
+        className={`text-black text-3xl font-semibold mb-10 ${inter.className}`}
+      >
+        Home Decoration
+      </h1>
+      <div className="grid grid-flow-row-dense sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5   p-4 gap-4 mb-5 ">
+        {data.map((item) =>
+          item.category === "home-decoration" ? (
+            <Item key={item.id} item={item} />
+          ) : (
+            ""
+          )
         )}
       </div>
     </div>

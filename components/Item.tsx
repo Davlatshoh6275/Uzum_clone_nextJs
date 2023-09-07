@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
-import Image from "next/image";
-import img from "../public/img/kalonka.png";
 import Link from "next/link";
 
 export default function Item(props: any) {
   const item = props.item;
   const [isLiked, setIsLiked] = useState();
+  let a;
 
   const itemLiked = (id: any) => {
     let arrID: any = JSON.parse(localStorage.getItem("id") || "[]");
@@ -19,28 +18,39 @@ export default function Item(props: any) {
 
   const itemCarzine = (i: any) => {
     let karzine: any = JSON.parse(localStorage.getItem("karzine") || "[]");
-    let prices : any = JSON.parse(localStorage.getItem("prices") || "[]");
+    let prices: any = JSON.parse(localStorage.getItem("prices") || "[]");
     karzine.push(i);
     prices.push({
       id: i.id,
-      price: parseFloat(i.price)
-    })
+      price: parseFloat(i.price),
+    });
 
     localStorage.setItem("karzine", JSON.stringify(karzine));
     localStorage.setItem("prices", JSON.stringify(prices));
   };
 
+  function persantagePrice() {
+    let price = (item.price / 100) * item.discountPercentage;
+    let p = item.price - Math.round(price);
+    a = p;
+  }
+
+  persantagePrice();
   return (
     <div>
       <div key={item.id} className=" h-full mb-5  ">
         <div className="relative">
           <Link href={`/product/${item.id}`} className="z-0">
-            <div className="mb-3 relative ">
-              <Image
-                src={img}
+            <div className="mb-3 relative  ">
+              <img
+                src={item.images[0]}
                 alt=""
-                style={{ width: "100%", objectFit: "cover" }}
-                height={300}
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                }}
               />
             </div>
           </Link>
@@ -58,9 +68,7 @@ export default function Item(props: any) {
               <del className="text-[18px] text-[#ACACAC] font-normal ">
                 {item.price} сум
               </del>
-              <h3 className="text-[20px] text-black font-semibold">
-                {item.discountPrice} сум
-              </h3>
+              <h3 className="text-[20px] text-black font-semibold">{a} сум</h3>
             </div>
             <div>
               <CgShoppingCart

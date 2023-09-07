@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import img from "../../public/img/karzin.png";
 import kalonka from "../../public/img/kalonka.png";
 import Item from "./[id]";
-
+import { count } from "console";
 
 const Carzin: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
@@ -26,7 +26,7 @@ const Carzin: React.FC = () => {
         return (prev += item);
       });
 
-      setTotal(t)
+      setTotal(t);
     }
 
     setPrices(arrPrice);
@@ -53,13 +53,18 @@ const Carzin: React.FC = () => {
           <div className="flex justify-between gap-4  ">
             <div className="w-3/4 h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11 ">
               {data.map((item: any) => (
-                <Item item={item} deleteItem={deleteItem} />
+                <Item item={item} deleteItem={deleteItem} total={total}
+                setTotal={setTotal}   />
               ))}
             </div>
             <div className=" w-[25%] h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11">
-              <h1 className="text-4xl text-black font-semibold " >{total} сум</h1>
-              {/* <p>Итого товаров: {data.length}</p> */}
-              <p>Итого скидки: 244 000 сум</p>
+              <h1 className="text-4xl text-black font-semibold mb-4 ">
+                {total} $
+              </h1>
+              <p className="text-black text-base font-medium ">
+                Итого товаров: {data.length}
+              </p>
+              {/* <p>Итого скидки: 244 000 сум</p> */}
             </div>
           </div>
         ) : (
