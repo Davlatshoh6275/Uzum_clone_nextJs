@@ -2,36 +2,47 @@ import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import img from "../../public/img/karzin.png";
-import kalonka from "../../public/img/kalonka.png";
 import Item from "./[id]";
-import { count } from "console";
 
 const Carzin: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
   const [prices, setPrices] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
+  const [real, setReal] = useState(0);
 
+  console.log(prices);
+  console.log(total);
 
   useEffect(() => {
     let a = JSON.parse(localStorage.getItem("karzine") || "[]");
     let arrPrice = JSON.parse(localStorage.getItem("prices") || "[]");
     let o = [];
+    let k = [];
 
     if (arrPrice.length !== 0) {
       for (let i = 0; i < arrPrice.length; i++) {
         o.push(arrPrice[i].price);
+        k.push(arrPrice[i].realPrice);
       }
 
       let t = o.reduce((prev, item) => {
         return (prev += item);
       });
 
+      let g = k.reduce((prev, item) => {
+        return (prev += item);
+      });
+
+      let y = g - t;
       setTotal(t);
+      setReal(y);
     }
 
     setPrices(arrPrice);
     setData(a);
   }, []);
+
+  console.log(real);
 
   const deleteItem = (id: any) => {
     let a = data.filter((item) => item.id !== id);
@@ -50,21 +61,30 @@ const Carzin: React.FC = () => {
           Корзина товаров
         </h1>
         {data.length !== 0 ? (
-          <div className="flex justify-between gap-4  ">
-            <div className="w-3/4 h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11 ">
+          <div className="flex flex-col gap-4 p-4 sm:flex-col  sm:gap-4 lg:flex lg:flex-row ">
+            <div className=" w-full sm:w-full  lg:w-3/4 h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11 ">
               {data.map((item: any) => (
-                <Item item={item} deleteItem={deleteItem} total={total}
-                setTotal={setTotal}   />
+                <Item
+                  item={item}
+                  deleteItem={deleteItem}
+                  total={total}
+                  setTotal={setTotal}
+                  prices={prices}
+                  setPrices={setPrices}
+                />
               ))}
             </div>
-            <div className=" w-[25%] h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11">
+            <div className=" w-full sm:w-full lg:w-1/4 h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11">
               <h1 className="text-4xl text-black font-semibold mb-4 ">
                 {total} $
               </h1>
-              <p className="text-black text-base font-medium ">
+              <p className="text-black text-base font-medium mb-2 ">
                 Итого товаров: {data.length}
               </p>
-              {/* <p>Итого скидки: 244 000 сум</p> */}
+              <p className="text-black text-base font-medium mb-3 " >Итого скидки: {real} $</p>
+              <button className="w-full h-9 bg-[#7000FF] rounded-md text-white font-medium ">
+                Оформить
+              </button>
             </div>
           </div>
         ) : (

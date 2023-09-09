@@ -29,6 +29,7 @@ const SwiperCom: React.FC = () => {
             background: "linear-gradient(70deg, #9643FF 0%, #5200BA 100%)",
           }}
         >
+
           <div className=" w-[70%] sm:w-[70%]  md:w-[70%] lg:w-[90%]  h-[200px]  absolute top-24 left-[50px] text-left ">
             <h1 className="text-xl md:text-3xl font-semibold text-white mb-3 ">
               Подсолнечное масло
@@ -36,7 +37,7 @@ const SwiperCom: React.FC = () => {
             <h3 className="text-white text-2xl font-semibold mb-3 ">
               30,000 сум
             </h3>
-            <p className="text-white text-[14px] line-clamp-5 ">
+            <p className="text-white text-[14px] line-clamp-5 lg:w-3/4">
               Станьте востребованным разработчиком. Вы изучите основы
               программирования и основные концепции компьютерных наук, цифровые
               технологии, операционные системы, программное обеспечение, базы
@@ -60,7 +61,7 @@ const SwiperCom: React.FC = () => {
             <h3 className="text-white text-2xl font-semibold mb-3 ">
               30,000 сум
             </h3>
-            <p className="text-white text-[14px] line-clamp-5 ">
+            <p className="text-white text-[14px] line-clamp-5 lg:w-3/4 ">
               Станьте востребованным разработчиком. Вы изучите основы
               программирования и основные концепции компьютерных наук, цифровые
               технологии, операционные системы, программное обеспечение, базы
@@ -84,7 +85,7 @@ const SwiperCom: React.FC = () => {
             <h3 className="text-white text-2xl font-semibold mb-3 ">
               30,000 сум
             </h3>
-            <p className="text-white text-[14px] line-clamp-5 ">
+            <p className="text-white text-[14px] line-clamp-5 lg:w-3/4">
               Станьте востребованным разработчиком. Вы изучите основы
               программирования и основные концепции компьютерных наук, цифровые
               технологии, операционные системы, программное обеспечение, базы
@@ -108,7 +109,7 @@ const SwiperCom: React.FC = () => {
             <h3 className="text-white text-2xl font-semibold mb-3 ">
               30,000 сум
             </h3>
-            <p className="text-white text-[14px] line-clamp-5 ">
+            <p className="text-white text-[14px] line-clamp-5 lg:w-3/4">
               Станьте востребованным разработчиком. Вы изучите основы
               программирования и основные концепции компьютерных наук, цифровые
               технологии, операционные системы, программное обеспечение, базы
@@ -132,7 +133,7 @@ const SwiperCom: React.FC = () => {
             <h3 className="text-white text-2xl font-semibold mb-3 ">
               30,000 сум
             </h3>
-            <p className="text-white text-[14px] line-clamp-5 ">
+            <p className="text-white text-[14px] line-clamp-5 lg:w-3/4">
               Станьте востребованным разработчиком. Вы изучите основы
               программирования и основные концепции компьютерных наук, цифровые
               технологии, операционные системы, программное обеспечение, базы
@@ -156,7 +157,7 @@ const SwiperCom: React.FC = () => {
             <h3 className="text-white text-2xl font-semibold mb-3 ">
               30,000 сум
             </h3>
-            <p className="text-white text-[14px] line-clamp-5 ">
+            <p className="text-white text-[14px] line-clamp-5 lg:w-3/4">
               Станьте востребованным разработчиком. Вы изучите основы
               программирования и основные концепции компьютерных наук, цифровые
               технологии, операционные системы, программное обеспечение, базы
@@ -180,7 +181,7 @@ const SwiperCom: React.FC = () => {
             <h3 className="text-white text-2xl font-semibold mb-3 ">
               30,000 сум
             </h3>
-            <p className="text-white text-[14px] line-clamp-5 ">
+            <p className="text-white text-[14px] line-clamp-5 lg:w-3/4">
               Станьте востребованным разработчиком. Вы изучите основы
               программирования и основные концепции компьютерных наук, цифровые
               технологии, операционные системы, программное обеспечение, базы

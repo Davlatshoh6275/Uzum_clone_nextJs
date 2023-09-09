@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  :root {
+    --color-bg-opacity: rgba(0, 0, 0, 0.80);
+  }
+}
+
 .button_css {
   color: #33c;
   font-size: 16px;

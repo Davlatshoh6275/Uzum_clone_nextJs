@@ -8,16 +8,12 @@ const Producs: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    // fetch("./api/hello")
-    //   .then((res) => res.json())
-    //   .then((res) => setData(res.producs));
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((res) => setData(res.products)
       );
   }, []);
 
-  console.log(data);
   
 
   return (

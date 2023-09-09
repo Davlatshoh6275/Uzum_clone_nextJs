@@ -1,31 +1,38 @@
 import React, { useState, useEffect } from "react";
-import logo from  "../styles/images/logo.png";
+import logo from "../styles/images/logo.png";
 import Image from "next/image";
 import { BiUser } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import Link from "next/link";
-import img from "../public/img/kalonka.png";
 
 const Navbar: React.FC = () => {
+  const [data, setData] = useState<any[]>([]);
+  const [active, setActive] = useState(true);
+  const [arrProduct, setArrProduct] = useState<any[]>([]);
 
-  const [data, setData] = useState<any[]>([])
+  useEffect(() => {
+    setData(JSON.parse(localStorage.getItem("karzine") || "[]"));
 
-  useEffect(()=> {
-    setData(JSON.parse(localStorage.getItem("karzine") || "[]"))
-  }, [])
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((res) => setArrProduct(res.products));
+  }, []);
 
   return (
     <div
-      className={` w-[90%] sm:px-4 flex  mx-auto items-center justify-center  h-20 border-solid border-0 gap-5 `}
+      className={`  w-[90%] sm:px-4 flex  mx-auto items-center justify-center  h-20 border-solid border-0 gap-5 `}
     >
       <div className="w-[70%] lg:w-[30%] ">
         <Link href="/">
           <Image src={logo} alt="logo" className="w-250px " />
         </Link>
       </div>
-      <button className=" hidden sm:hidden md:hidden lg:block  border-solid border-[#EAEAF9] border-2 py-2 px-4 rounded button_css bg-[#EAEAF9] ">
+      <button
+        onClick={() => setActive(!active)}
+        className=" hidden sm:hidden md:hidden lg:block  border-solid border-[#EAEAF9] border-2 py-2 px-4 rounded button_css bg-[#EAEAF9] "
+      >
         Каталог
       </button>
       <div className="relative w-full  ">
@@ -58,6 +65,69 @@ const Navbar: React.FC = () => {
           </li>
         </Link>
       </ul>
+
+      <div
+        className={
+          "w-full z-10 h-screen fixed top-20 " +
+          (active == true ? "hidden" : "block")
+        }
+      >
+        <div className="w-full  z-100 pt-8 bg-white absolute top-0" id="close">
+          <div className="relative left-96">
+            <p className="text-[#ACACAC] text-base font-medium mb-5 ">
+              Категории товаров
+            </p>
+            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
+              Smartphones{" "}
+              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                {" "}
+                5 товара
+              </span>
+            </h1>
+            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
+              Laptops{" "}
+              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                {" "}
+                5 товара
+              </span>
+            </h1>
+            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
+              Fragrances{" "}
+              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                {" "}
+                5 товара
+              </span>
+            </h1>
+            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
+              Skincare{" "}
+              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                {" "}
+                5 товара
+              </span>
+            </h1>
+            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
+              Groceries{" "}
+              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                {" "}
+                5 товара
+              </span>
+            </h1>
+            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
+              Home Decoration{" "}
+              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                {" "}
+                5 товара
+              </span>
+            </h1>
+          </div>
+        </div>
+        <div
+          className="w-full h-full -z-10 absolute bottom-0  bg-opacity-75 bg-black"
+          onClick={(e) => {
+            setActive(!active);
+          }}
+        ></div>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import SwiperCom from "@/components/SwiperCom";
 import Producs from "@/components/Producs";
 import Liked from "./liked/[id]";
-import Carzin from "./carzin";
 
 const inter = Montserrat({ subsets: ["latin"] });
 

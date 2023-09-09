@@ -4,9 +4,15 @@ import { AiOutlineHeart } from "react-icons/ai";
 import Link from "next/link";
 
 export default function Item(props: any) {
-  const item = props.item;
+  const { item } = props;
   const [isLiked, setIsLiked] = useState();
-  let a;
+  let a = 0;
+
+  function persantagePrice() {
+    let price = (item.price / 100) * item.discountPercentage;
+    let p = item.price - Math.round(price);
+    a = p;
+  }
 
   const itemLiked = (id: any) => {
     let arrID: any = JSON.parse(localStorage.getItem("id") || "[]");
@@ -22,18 +28,13 @@ export default function Item(props: any) {
     karzine.push(i);
     prices.push({
       id: i.id,
-      price: parseFloat(i.price),
+      price: a,
+      realPrice: item.price,
     });
 
     localStorage.setItem("karzine", JSON.stringify(karzine));
     localStorage.setItem("prices", JSON.stringify(prices));
   };
-
-  function persantagePrice() {
-    let price = (item.price / 100) * item.discountPercentage;
-    let p = item.price - Math.round(price);
-    a = p;
-  }
 
   persantagePrice();
   return (
@@ -62,7 +63,9 @@ export default function Item(props: any) {
         </div>
 
         <div className=" ">
-          <h2 className="font-semibold text-black text-[14px] ">{item.name}</h2>
+          <h2 className="  lg:font-semibold text-black lg:text-[14px] line-clamp-2 ">
+            {item.description}
+          </h2>
           <div className="flex justify-between items-end ">
             <div>
               <del className="text-[18px] text-[#ACACAC] font-normal ">
