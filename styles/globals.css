@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+/* @layer components {
   :root {
     --color-bg-opacity: rgba(0, 0, 0, 0.80);
   }
-}
+} */
 
 .button_css {
   color: #33c;
