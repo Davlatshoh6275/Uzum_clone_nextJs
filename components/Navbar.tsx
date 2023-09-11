@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import logo from "../styles/images/logo.png";
 import Image from "next/image";
 import { BiUser } from "react-icons/bi";
@@ -11,6 +11,19 @@ const Navbar: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
   const [active, setActive] = useState(true);
   const [arrProduct, setArrProduct] = useState<any[]>([]);
+  const [filtered, setFiltered] = useState<any[]>([])
+
+  const [inputValue, setInputeValue] = useState<string>("")
+
+  const searchHandler = useCallback(() => {
+    const filteredData = arrProduct.filter((item) => {
+      return item.brand.toLowerCase().includes(inputValue.toLowerCase())
+    })
+
+    setFiltered(filteredData)
+  }, [arrProduct, inputValue])
+
+  
 
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem("karzine") || "[]"));
@@ -18,7 +31,9 @@ const Navbar: React.FC = () => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((res) => setArrProduct(res.products));
+
   }, []);
+
 
   return (
     <div
@@ -40,6 +55,7 @@ const Navbar: React.FC = () => {
           type="text"
           className="hidden sm:hidden md:hidden lg:block w-full  border-solid border-2 outline-none py-2 px-4 rounded color-[#9AA5AF] "
           placeholder="Искать товары"
+          onChange={(e) => setInputeValue(e.target.value)}
         />
         <FiSearch className=" hidden absolute right-3.5 top-3.5 sm:hidden md:hidden lg:block  " />
       </div>

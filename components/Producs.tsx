@@ -14,7 +14,6 @@ const Producs: React.FC = () => {
       );
   }, []);
 
-  
 
   return (
     <div className="w-[100%] m-0 mx-auto sm:px-4  md:px-10 lg:px-14 xl:px-24 ">

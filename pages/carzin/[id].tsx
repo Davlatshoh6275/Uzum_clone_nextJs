@@ -18,9 +18,9 @@ export default function Item(props: any) {
     setCount(count + 1);
     let a = total;
 
-    for(let i of prices) {
-      if(i.id === item.id) {
-        a += i.price
+    for (let i of prices) {
+      if (i.id === item.id) {
+        a += i.price;
         setTotal(a);
       }
     }
@@ -30,13 +30,12 @@ export default function Item(props: any) {
 
     let a = total;
 
-    for(let i of prices) {
-      if(i.id === item.id) {
-        a -= i.price
+    for (let i of prices) {
+      if (i.id === item.id) {
+        a -= i.price;
         setTotal(a);
       }
     }
-
   };
   return (
     <div key={item.id} className="flex items-center gap-4  mb-4 ">
@@ -44,7 +43,7 @@ export default function Item(props: any) {
         <img
           src={item.images[0]}
           alt=""
-          className="w-40 h-48 rounded-xl object-cover object-top  "
+          className="w-40 h-48 rounded-xl object-cover object-center  "
         />
       </div>
       <div className="flex flex-col gap-2 ">
