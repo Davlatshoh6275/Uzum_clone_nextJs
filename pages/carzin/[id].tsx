@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 export default function Item(props: any) {
-  const { item, deleteItem, total, setTotal, prices, setPrices } = props;
+  const { item, deleteItem, total, setTotal, prices } = props;
 
   let a;
 

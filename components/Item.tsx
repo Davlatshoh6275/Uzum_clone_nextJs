@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
 import Link from "next/link";
 
 export default function Item(props: any) {
-  const { item } = props;
+  const { item, cartUpdate, update } = props;
   const [isLiked, setIsLiked] = useState();
   let a = 0;
 
@@ -31,6 +32,9 @@ export default function Item(props: any) {
       price: a,
       realPrice: item.price,
     });
+
+    
+    cartUpdate(!update)
 
     localStorage.setItem("karzine", JSON.stringify(karzine));
     localStorage.setItem("prices", JSON.stringify(prices));

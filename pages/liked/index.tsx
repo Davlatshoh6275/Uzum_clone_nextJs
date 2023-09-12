@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -8,31 +7,20 @@ import hearts from "../../public/img/hearts.png";
 import { CgShoppingCart } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
 
-// export const getServerSideProps: GetServerSideProps = async (params: any) => {
-//   const res = await fetch("./api/hello/");
-//   const data = await res.json();
-
-//   return {
-//     props: {
-//       liked: data,
-//     },
-//   };
-// };
-
-const index: React.FC = ({ liked }: any) => {
+export default function Liked() {
   const [data, setData] = useState<any[]>([]);
+  const [arrID, setArrId] = useState([]);
+  const [arr, setArr] = useState([]);
 
   useEffect(() => {
-    fetch("./api/hello")
-      .then((res) => res.json())
-      .then(
-        (res) => (
-          (res = res.producs.filter((item: any) => item.liked === true)),
-          setData(res)
-        )
-      );
-  }, []);
+    let arrId = JSON.parse(localStorage.getItem("id") || "[]");
+    setArrId(arrId);
 
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((res) => setArr(res.products));
+  }, []);
+  
   return (
     <div>
       <Navbar />
@@ -100,6 +88,4 @@ const index: React.FC = ({ liked }: any) => {
       </div>
     </div>
   );
-};
-
-export default index;
+}

@@ -3,6 +3,11 @@ import React, { useState, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Item from "@/components/Item";
 
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const res = await fetch("https://dummyjson.com/products/" + params?.id);
   const responsive = await fetch("https://dummyjson.com/products/");
@@ -18,10 +23,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
-const UserPage: React.FC = ({ data, array }: any) => {
+const UserPage: React.FC = ({ data, array, carzineCount }: any) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+
   let a = 0;
 
-  console.log(array);
 
   function persantagePrice() {
     let price = (data.price / 100) * data.discountPercentage;
@@ -76,9 +82,7 @@ const UserPage: React.FC = ({ data, array }: any) => {
       <Navbar />
       <div className="w-[100%] mt-10 mx-auto sm:px-4  md:px-10 lg:px-14 xl:px-24 ">
         <div className="w-full flex-col lg:flex  lg:flex-row lg:justify-center lg:gap-14 mb-24 ">
-          <div className=" w-[90%] h-64 mx-auto lg:mx-0 lg:w-1/3 lg:h-[500px] border border-solid border-black ">
-            swiper
-          </div>
+          <div className=" w-[90%] h-64 mx-auto lg:mx-0 lg:w-1/3 lg:h-[500px] border border-solid border-black "></div>
           <div className="text-start py-6 w-[90%] mx-auto lg:w-2/3 ">
             <h1 className="text-black text-2xl font-semibold lg:text-3xl mb-6 ">
               {data.description}
@@ -119,7 +123,10 @@ const UserPage: React.FC = ({ data, array }: any) => {
             </p>
 
             <div className="flex gap-4">
-              <button onClick={() => itemCarzine(data)} className="w-52 h-9 bg-[#7000FF] text-white rounded ">
+              <button
+                onClick={() => itemCarzine(data)}
+                className="w-52 h-9 bg-[#7000FF] text-white rounded "
+              >
                 Добавить в корзину
               </button>
               <button className="w-52 h-9 border-2 border-solid border-[#7000FF] text-[#7000FF] font-semibold rounded ">
@@ -139,7 +146,7 @@ const UserPage: React.FC = ({ data, array }: any) => {
             и смягчающего эффекта Lenor делает вещи безупречно чистыми, нежными
             и свежими. Стирайте согласно рекомендациям на ярлыках текстильных
             изделий. Рекомендованный режим стирки — от 20 минут при температуре
-            воды 30'C и выше. Обратите внимание: порошок не предназначен для
+            воды 30 C и выше. Обратите внимание: порошок не предназначен для
             стирки изделий из шерсти и шелка. Синтетическое моющее средство
             порошкообразное для использования в стиральных машинах любого типа.
             Рекомендованная температура стирки указана на ярлыках текстильных

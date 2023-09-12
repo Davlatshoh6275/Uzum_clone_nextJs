@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import logo from "../styles/images/logo.png";
 import Image from "next/image";
 import { BiUser } from "react-icons/bi";
@@ -6,12 +6,23 @@ import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import Link from "next/link";
+import { carzinCounter } from "@/pages";
 
 const Navbar: React.FC = () => {
+
+  let a = useContext(carzinCounter)
+
   const [data, setData] = useState<any[]>([]);
   const [active, setActive] = useState(true);
   const [arrProduct, setArrProduct] = useState<any[]>([]);
   const [filtered, setFiltered] = useState<any[]>([])
+
+  const [cart, setCart] = useState(a)
+
+
+  console.log(cart);
+  
+  
 
   const [inputValue, setInputeValue] = useState<string>("")
 

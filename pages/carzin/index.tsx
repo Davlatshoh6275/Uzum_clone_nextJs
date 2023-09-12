@@ -10,9 +10,6 @@ const Carzin: React.FC = () => {
   const [total, setTotal] = useState(0);
   const [real, setReal] = useState(0);
 
-  console.log(prices);
-  console.log(total);
-
   useEffect(() => {
     let a = JSON.parse(localStorage.getItem("karzine") || "[]");
     let arrPrice = JSON.parse(localStorage.getItem("prices") || "[]");
@@ -42,7 +39,6 @@ const Carzin: React.FC = () => {
     setData(a);
   }, []);
 
-  console.log(real);
 
   const deleteItem = (id: any) => {
     let a = data.filter((item) => item.id !== id);

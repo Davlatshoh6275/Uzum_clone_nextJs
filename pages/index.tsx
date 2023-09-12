@@ -1,18 +1,22 @@
-import { Montserrat } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import SwiperCom from "@/components/SwiperCom";
 import Producs from "@/components/Producs";
-import Liked from "./liked/[id]";
+import { useState, createContext, useContext } from "react";
 
-const inter = Montserrat({ subsets: ["latin"] });
+export const carzinCounter = createContext<any>(false);
 
 export default function Home() {
+
+  let a = useContext(carzinCounter)
+  const [update, setUpdate] = useState(a);
+
   return (
     <main>
-      <Navbar />
-      <SwiperCom />
-      <Producs />
-      <Liked />
+      <carzinCounter.Provider value={update}>
+        <Navbar />
+        <SwiperCom />
+        <Producs cartUpdate={setUpdate} update={update} />
+      </carzinCounter.Provider>
     </main>
   );
 }
