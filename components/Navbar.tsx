@@ -67,7 +67,7 @@ const Navbar: React.FC = () => {
           <div className="w-full    z-100   bg-white py-12 px-80 ">
             <h2 className="text-base text-[#ACACAC] font-normal ">Поиск</h2>
             {activeSearch.map((item: any) => (
-              <p className="text-black text-2xl mb-3 font-medium ">
+              <p key={item.id} className="text-black text-2xl mb-3 font-medium ">
                 {item.brand}
               </p>
             ))}

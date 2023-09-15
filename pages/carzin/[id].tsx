@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 export default function Item(props: any) {
-  const { item, deleteItem, total, setTotal, prices } = props;
+  const { item, deleteItem, total, setTotal, prices, key } = props;
 
   let a;
 
@@ -39,7 +39,7 @@ export default function Item(props: any) {
     }
   };
   return (
-    <div key={item.id} className="flex items-center gap-4  mb-4 ">
+    <div key={key} className="flex items-center gap-4  mb-4 ">
       <div className="border border-solid border-[#FEFEFE] rounded-xl">
         <img
           src={item.images[0]}
