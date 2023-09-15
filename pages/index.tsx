@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main>
       <carzinCounter.Provider value={update}>
-        <Navbar />
+        <Navbar  />
         <SwiperCom />
         <Producs cartUpdate={setUpdate} update={update} />
       </carzinCounter.Provider>

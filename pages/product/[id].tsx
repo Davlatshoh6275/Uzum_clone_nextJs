@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Item from "@/components/Item";
 
@@ -23,8 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
-const UserPage: React.FC = ({ data, array, carzineCount }: any) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+const UserPage: React.FC = ({ data, array }: any) => {
 
   let a = 0;
 

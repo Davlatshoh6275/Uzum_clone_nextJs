@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import logo from "../styles/images/logo.png";
 import Image from "next/image";
 import { BiUser } from "react-icons/bi";
@@ -6,35 +6,28 @@ import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import Link from "next/link";
-import { carzinCounter } from "@/pages";
 
 const Navbar: React.FC = () => {
-
-  let a = useContext(carzinCounter)
-
   const [data, setData] = useState<any[]>([]);
   const [active, setActive] = useState(true);
   const [arrProduct, setArrProduct] = useState<any[]>([]);
-  const [filtered, setFiltered] = useState<any[]>([])
 
-  const [cart, setCart] = useState(a)
+  const [activeSearch, setActiveSearch] = useState<any>([]);
 
-
-  console.log(cart);
-  
-  
-
-  const [inputValue, setInputeValue] = useState<string>("")
-
-  const searchHandler = useCallback(() => {
-    const filteredData = arrProduct.filter((item) => {
-      return item.brand.toLowerCase().includes(inputValue.toLowerCase())
-    })
-
-    setFiltered(filteredData)
-  }, [arrProduct, inputValue])
-
-  
+  const handleSearch = (e: any) => {
+    if (e.target.value == "") {
+      setActiveSearch([]);
+      return false;
+    } else {
+      setActiveSearch(
+        arrProduct
+          .filter((item) =>
+            item.description.toLowerCase().includes(e.target.value)
+          )
+          .slice(0, 8)
+      );
+    }
+  };
 
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem("karzine") || "[]"));
@@ -42,9 +35,7 @@ const Navbar: React.FC = () => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((res) => setArrProduct(res.products));
-
   }, []);
-
 
   return (
     <div
@@ -66,10 +57,25 @@ const Navbar: React.FC = () => {
           type="text"
           className="hidden sm:hidden md:hidden lg:block w-full  border-solid border-2 outline-none py-2 px-4 rounded color-[#9AA5AF] "
           placeholder="Искать товары"
-          onChange={(e) => setInputeValue(e.target.value)}
+          onChange={(e) => handleSearch(e)}
         />
         <FiSearch className=" hidden absolute right-3.5 top-3.5 sm:hidden md:hidden lg:block  " />
       </div>
+
+      {activeSearch.length > 0 && (
+        <div className="fixed h-full top-20 bg-state-800 flex flex-col text-black w-full rounded-xl left-0 z-20  ">
+          <div className="w-full    z-100   bg-white py-12 px-80 ">
+            <h2 className="text-base text-[#ACACAC] font-normal ">Поиск</h2>
+            {activeSearch.map((item: any) => (
+              <p className="text-black text-2xl mb-3 font-medium ">
+                {item.brand}
+              </p>
+            ))}
+          </div>
+          <div className="w-full h-full    bg-opacity-75 bg-black"></div>
+        </div>
+      )}
+
       <div className="flex gap-4 lg:hidden ">
         <BiUser size="23px" />
         <AiOutlineHeart size="23px" />
