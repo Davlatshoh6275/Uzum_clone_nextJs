@@ -39,7 +39,6 @@ const Carzin: React.FC = () => {
     setData(a);
   }, []);
 
-
   const deleteItem = (id: any) => {
     let a = data.filter((item) => item.id !== id);
     let b = prices.filter((item) => item.id !== id);
@@ -60,14 +59,17 @@ const Carzin: React.FC = () => {
           <div className="flex flex-col gap-4 p-4 sm:flex-col  sm:gap-4 lg:flex lg:flex-row ">
             <div className=" w-full sm:w-full  lg:w-3/4 h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11 ">
               {data.map((item: any) => (
-                <Item
-                  item={item}
-                  deleteItem={deleteItem}
-                  total={total}
-                  setTotal={setTotal}
-                  prices={prices}
-                  setPrices={setPrices}
-                />
+                <div key={item.id} >
+                  <Item
+                    item={item}
+                    deleteItem={deleteItem}
+                    total={total}
+                    setTotal={setTotal}
+                    prices={prices}
+                    setPrices={setPrices}
+                    key={item.id}
+                  />
+                </div>
               ))}
             </div>
             <div className=" w-full sm:w-full lg:w-1/4 h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11">
@@ -77,7 +79,9 @@ const Carzin: React.FC = () => {
               <p className="text-black text-base font-medium mb-2 ">
                 Итого товаров: {data.length}
               </p>
-              <p className="text-black text-base font-medium mb-3 " >Итого скидки: {real} $</p>
+              <p className="text-black text-base font-medium mb-3 ">
+                Итого скидки: {real} $
+              </p>
               <button className="w-full h-9 bg-[#7000FF] rounded-md text-white font-medium ">
                 Оформить
               </button>
