@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Item from "@/components/Item";
 
+import { EffectCards } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+import "swiper/css/effect-cards";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const res = await fetch("https://dummyjson.com/products/" + params?.id);
@@ -24,9 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 };
 
 const UserPage: React.FC = ({ data, array }: any) => {
-
   let a = 0;
-
 
   function persantagePrice() {
     let price = (data.price / 100) * data.discountPercentage;
@@ -76,12 +74,39 @@ const UserPage: React.FC = ({ data, array }: any) => {
     localStorage.setItem("karzine", JSON.stringify(karzine));
     localStorage.setItem("prices", JSON.stringify(prices));
   };
+
   return (
     <div>
       <Navbar />
       <div className="w-[100%] mt-10 mx-auto sm:px-4  md:px-10 lg:px-14 xl:px-24 ">
         <div className="w-full flex-col lg:flex  lg:flex-row lg:justify-center lg:gap-14 mb-24 ">
-          <div className=" w-[90%] h-64 mx-auto lg:mx-0 lg:w-1/3 lg:h-[500px] border border-solid border-black "></div>
+          <div className=" w-[90%]  h-1/3 mx-auto lg:mx-0 lg:w-1/3 lg:h-[500px] ">
+            <Swiper
+              effect={"cards"}
+              grabCursor={true}
+              modules={[EffectCards]}
+              className="mySwiper  "
+            >
+              <SwiperSlide>
+                <img src={data.images[1]} alt="" className="object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={data.images[1]} alt="" className="object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={data.images[1]} alt="" className="object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={data.images[1]} alt="" className="object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={data.images[1]} alt="" className="object-cover" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={data.images[1]} alt="" className="object-cover" />
+              </SwiperSlide>
+            </Swiper>
+          </div>
           <div className="text-start py-6 w-[90%] mx-auto lg:w-2/3 ">
             <h1 className="text-black text-2xl font-semibold lg:text-3xl mb-6 ">
               {data.description}

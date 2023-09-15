@@ -48,7 +48,7 @@ export default function Item(props: any) {
           <Link href={`/product/${item.id}`} className="z-0">
             <div className="mb-3 relative  ">
               <img
-                src={item.images[0]}
+                src={item.images[1]}
                 alt=""
                 style={{
                   width: "100%",
