@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function Item(props: any) {
   const { item, cartUpdate, update } = props;
   const [isLiked, setIsLiked] = useState();
+  // const [count , setCount] = useState
   let a = 0;
 
   function persantagePrice() {
@@ -26,6 +27,7 @@ export default function Item(props: any) {
   const itemCarzine = (i: any) => {
     let karzine: any = JSON.parse(localStorage.getItem("karzine") || "[]");
     let prices: any = JSON.parse(localStorage.getItem("prices") || "[]");
+    i.count = 1;
     karzine.push(i);
     prices.push({
       id: i.id,
@@ -33,8 +35,7 @@ export default function Item(props: any) {
       realPrice: item.price,
     });
 
-    
-    cartUpdate(!update)
+    cartUpdate(!update);
 
     localStorage.setItem("karzine", JSON.stringify(karzine));
     localStorage.setItem("prices", JSON.stringify(prices));

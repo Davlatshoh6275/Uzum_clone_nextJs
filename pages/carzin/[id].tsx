@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 export default function Item(props: any) {
-  const { item, deleteItem, total, setTotal, prices, key } = props;
+  const { item, deleteItem, total, setTotal, prices, key, data } = props;
 
   let a;
 
@@ -13,11 +13,12 @@ export default function Item(props: any) {
   }
   persantagePrice();
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(item.count);
 
   const plusItemCount = (item: any) => {
     setCount(count + 1);
     let a = total;
+    item.count++;
 
     for (let i of prices) {
       if (i.id === item.id) {
@@ -25,11 +26,14 @@ export default function Item(props: any) {
         setTotal(a);
       }
     }
+
+    localStorage.setItem("karzine", JSON.stringify(data));
   };
   const minusItemCount = (item: any) => {
     setCount(count - 1);
 
     let a = total;
+    item.count--;
 
     for (let i of prices) {
       if (i.id === item.id) {
@@ -37,6 +41,8 @@ export default function Item(props: any) {
         setTotal(a);
       }
     }
+
+    localStorage.setItem("karzine", JSON.stringify(data));
   };
   return (
     <div key={key} className="flex items-center gap-4  mb-4 ">
