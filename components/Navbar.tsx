@@ -142,7 +142,7 @@ const Navbar: React.FC<Props> = ({ update }: Props) => {
               </h1>
             </Link>
             <Link href={"#fragrances"}>
-              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" onClick={() => setActive(!active)}>
+              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" >
                 Fragrances{" "}
                 <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
                   {" "}
@@ -160,7 +160,7 @@ const Navbar: React.FC<Props> = ({ update }: Props) => {
               </h1>
             </Link>
             <Link href={"#groceries"}>
-              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" onClick={() => setActive(!active)}>
+              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" >
                 Groceries{" "}
                 <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
                   {" "}
@@ -169,7 +169,7 @@ const Navbar: React.FC<Props> = ({ update }: Props) => {
               </h1>
             </Link>
             <Link href={"#decoration"}>
-              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" onClick={() => setActive(!active)}>
+              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" >
                 Home Decoration{" "}
                 <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
                   {" "}

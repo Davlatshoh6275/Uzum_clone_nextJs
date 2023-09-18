@@ -10,13 +10,11 @@ export default function Home() {
 
   useEffect(() => {
    let a = JSON.parse(localStorage.getItem("karzine") || "[]")
-   console.log(a);
 
    setUpdate(a.length)
    
   }, [])
 
-  console.log(update);
   
 
   return (

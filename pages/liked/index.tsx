@@ -8,24 +8,27 @@ import { CgShoppingCart } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
 
 export default function Liked() {
-  const [data, setData] = useState<any[]>([]);
-  const [arrID, setArrId] = useState([]);
-  const [arr, setArr] = useState([]);
+  const [dataArr, setData] = useState<any[]>([]);
   const [update, setUpdate] = useState(0);
 
   useEffect(() => {
-    let arrId = JSON.parse(localStorage.getItem("id") || "[]");
-    setArrId(arrId);
-
-    fetch("https://dummyjson.com/products")
-      .then((res) => res.json())
-      .then((res) => setArr(res.products));
+    let data = JSON.parse(localStorage.getItem("liked") || "[]");
+    setData(data);
   }, []);
-  
+
+  const delLiked = (item: any ) => {
+    let a = dataArr.filter(i => i.id !== item.id)
+
+    localStorage.setItem("liked", JSON.stringify(a));
+    
+    setData(a)
+  }
+   
+
   return (
     <div>
       <Navbar update={update} />
-      {data.length !== 0 ? (
+      {dataArr.length !== 0 ? (
         <h1 className="sm:px-4  md:px-10 lg:px-14 xl:px-24 text-black text-3xl  sm:text-3xl font-semibold mb-10 ">
           Избранное
         </h1>
@@ -34,38 +37,37 @@ export default function Liked() {
       )}
 
       <div className="grid grid-flow-row-dense sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5  sm:px-4  md:px-10 lg:px-14 xl:px-24 gap-4 mb-5 ">
-        {data.length !== 0 ? (
-          data.map((item: any) => (
-            // <Link href={`/liked/${item.id}`}>{item.name}</Link>
-            <div key={item.id} className=" h-full mb-5  ">
+        {dataArr.length !== 0 ? (
+          dataArr.map((item: any) => (
+            <div key={item.id} className=" h-full w-82 rounded-xl p-5 mb-5 border-2 border-solid border-[#E5E7EB] ">
               <div className="relative">
                 <Link href={`/product/${item.id}`} className="z-0">
-                  <div className="mb-3 relative ">
-                    <Image
-                      src={img}
-                      alt=""
-                      style={{ width: "100%", objectFit: "cover" }}
-                      height={300}
+                  <div className=" h-72  mb-3 relative ">
+                    <img
+                      src={item.images[0]}
+                      alt="img"
+                      className="h-full"
                     />
                   </div>
                 </Link>
                 <AiOutlineHeart
                   className={`cursor-pointer absolute top-2 text-2xl right-2  z-100 `}
-                  color={`${item.liked === true ? "red" : "#ACACAC"}`}
+                  color='red'
+                  onClick={() => delLiked(item)}
                 />
               </div>
 
               <div className=" ">
                 <h2 className="font-semibold text-black text-[14px] ">
-                  {item.name}
+                  {item.brand}
                 </h2>
                 <div className="flex justify-between items-end ">
                   <div>
-                    <del className="text-[18px] text-[#ACACAC] font-normal ">
+                    {/* <del className="text-[18px] text-[#ACACAC] font-normal ">
                       {item.price} сум
-                    </del>
+                    </del> */}
                     <h3 className="text-[20px] text-black font-semibold">
-                      {item.discountPrice} сум
+                      {item.price} сум
                     </h3>
                   </div>
                   <div>

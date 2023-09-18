@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import Link from "next/link";
 
 export default function Item(props: any) {
   const { item, cartUpdate, update } = props;
-  const [isLiked, setIsLiked] = useState();
-  // const [count , setCount] = useState
+  const [isLiked, setIsLiked] = useState<any>(false);
+  const [active, setActive] = useState<any>(false)
   let a = 0;
 
   function persantagePrice() {
@@ -16,29 +17,49 @@ export default function Item(props: any) {
     a = p;
   }
 
-  const itemLiked = (id: any) => {
-    let arrID: any = JSON.parse(localStorage.getItem("id") || "[]");
-    arrID.push(id);
-    localStorage.setItem("id", JSON.stringify(arrID));
+  const itemLiked = (item: any) => {
+    let arrLiked: any = JSON.parse(localStorage.getItem("liked") || "[]");
 
-    setIsLiked(arrID.includes(id));
+    if (!isLiked) {
+      arrLiked.push(item);
+      localStorage.setItem("liked", JSON.stringify(arrLiked));
+    } else {
+      let a = arrLiked.filter((i: any) => i.id !== item.id);
+      localStorage.setItem("liked", JSON.stringify(a));
+    }
+
+    setIsLiked(!isLiked);
+
   };
 
   const itemCarzine = (i: any) => {
     let karzine: any = JSON.parse(localStorage.getItem("karzine") || "[]");
     let prices: any = JSON.parse(localStorage.getItem("prices") || "[]");
-    i.count = 1;
-    karzine.push(i);
-    prices.push({
-      id: i.id,
-      price: a,
-      realPrice: item.price,
-    });
 
-    cartUpdate(update + 1);
+    if(!active) {
 
-    localStorage.setItem("karzine", JSON.stringify(karzine));
-    localStorage.setItem("prices", JSON.stringify(prices));
+      i.count = 1;
+  
+      karzine.push(i);
+      prices.push({
+        id: i.id,
+        price: a,
+        realPrice: item.price,
+      });
+  
+      cartUpdate(update + 1);
+      
+      localStorage.setItem("karzine", JSON.stringify(karzine));
+      localStorage.setItem("prices", JSON.stringify(prices));
+    } else {
+      let a = karzine.filter((item: any) => item.id !== i.id);
+      let b = prices.filter((item: any) => item.id !== i.id);
+      localStorage.setItem("karzine", JSON.stringify(a));
+      localStorage.setItem("prices", JSON.stringify(b));
+      cartUpdate(update - 1);
+    }
+
+    setActive(!active)
   };
 
   persantagePrice();
@@ -60,11 +81,19 @@ export default function Item(props: any) {
               />
             </div>
           </Link>
-          <AiOutlineHeart
-            onClick={() => itemLiked(item.id)}
-            className={`cursor-pointer absolute top-2 text-2xl right-2  z-100 `}
-            color={isLiked ? "red" : "#ACACAC"}
-          />
+          {isLiked ? (
+            <AiFillHeart
+              onClick={() => itemLiked(item)}
+              className={`cursor-pointer absolute top-2 text-2xl right-2  z-100 `}
+              color={"red"}
+            />
+          ) : (
+            <AiOutlineHeart
+              onClick={() => itemLiked(item)}
+              className={`cursor-pointer absolute top-2 text-2xl right-2  z-100 `}
+              // backgroundColor={isLiked ? "red" : "#ACACAC"}
+            />
+          )}
         </div>
 
         <div className=" ">
@@ -78,7 +107,7 @@ export default function Item(props: any) {
               </del>
               <h3 className="text-[20px] text-black font-semibold">{a} сум</h3>
             </div>
-            <div>
+            <div aria-disabled={true}>
               <CgShoppingCart
                 className="border border-solid border-[#ACACAC] text-[32px] rounded-full p-2 cursor-pointer "
                 onClick={() => itemCarzine(item)}
