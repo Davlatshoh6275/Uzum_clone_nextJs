@@ -68,13 +68,13 @@ export default function Item(props: any) {
       <div key={item.id} className=" h-full mb-5  ">
         <div className="relative">
           <Link href={`/product/${item.id}`} className="z-0">
-            <div className="mb-3 relative  ">
+            <div className="mb-3 relative bg-[#efefef] rounded-xl ">
               <img
                 src={item.images[1]}
                 alt=""
                 style={{
                   width: "100%",
-                  height: "300px",
+                  height: "350px",
                   objectFit: "cover",
                   borderRadius: "10px",
                 }}
