@@ -1,22 +1,29 @@
 import Navbar from "@/components/Navbar";
 import SwiperCom from "@/components/SwiperCom";
 import Producs from "@/components/Producs";
-import { useState, createContext, useContext } from "react";
+import { useState, useEffect} from "react";
 
-export const carzinCounter = createContext<any>(false);
 
 export default function Home() {
 
-  let a = useContext(carzinCounter)
-  const [update, setUpdate] = useState(a);
+  const [update, setUpdate] = useState(0);
+
+  useEffect(() => {
+   let a = JSON.parse(localStorage.getItem("karzine") || "[]")
+   console.log(a);
+
+   setUpdate(a.length)
+   
+  }, [])
+
+  console.log(update);
+  
 
   return (
     <main>
-      <carzinCounter.Provider value={update}>
-        <Navbar  />
+        <Navbar  update={update} />
         <SwiperCom />
         <Producs cartUpdate={setUpdate} update={update} />
-      </carzinCounter.Provider>
     </main>
   );
 }

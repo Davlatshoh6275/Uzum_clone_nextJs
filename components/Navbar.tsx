@@ -7,7 +7,11 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsBag } from "react-icons/bs";
 import Link from "next/link";
 
-const Navbar: React.FC = () => {
+interface Props {
+  update: any;
+}
+
+const Navbar: React.FC<Props> = ({ update }: Props) => {
   const [data, setData] = useState<any[]>([]);
   const [active, setActive] = useState(true);
   const [arrProduct, setArrProduct] = useState<any[]>([]);
@@ -41,9 +45,9 @@ const Navbar: React.FC = () => {
     <div
       className={`  w-[90%] sm:px-4 flex  mx-auto items-center justify-center  h-20 border-solid border-0 gap-5 `}
     >
-      <div className="w-[70%] lg:w-[30%] ">
+      <div className="w-[100%] lg:w-[30%] ">
         <Link href="/">
-          <Image src={logo} alt="logo" className="w-250px " />
+          <Image src={logo} alt="logo" />
         </Link>
       </div>
       <button
@@ -67,7 +71,10 @@ const Navbar: React.FC = () => {
           <div className="w-full    z-100   bg-white py-12 px-80 ">
             <h2 className="text-base text-[#ACACAC] font-normal ">Поиск</h2>
             {activeSearch.map((item: any) => (
-              <p key={item.id} className="text-black text-2xl mb-3 font-medium ">
+              <p
+                key={item.id}
+                className="text-black text-2xl mb-3 font-medium "
+              >
                 {item.brand}
               </p>
             ))}
@@ -93,7 +100,7 @@ const Navbar: React.FC = () => {
           <li className=" flex text-xl font-medium gap-2 ">
             Корзина{" "}
             <span className="flex items-center justify-center border border-solid border-[#7000FF] w-7 h-7 rounded bg-[#7000FF] text-white ">
-              {data.length}
+              {update}
             </span>
           </li>
         </Link>
@@ -110,48 +117,66 @@ const Navbar: React.FC = () => {
             <p className="text-[#ACACAC] text-base font-medium mb-5 ">
               Категории товаров
             </p>
-            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
-              Smartphones{" "}
-              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
-                {" "}
-                5 товара
-              </span>
-            </h1>
-            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
-              Laptops{" "}
-              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
-                {" "}
-                5 товара
-              </span>
-            </h1>
-            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
-              Fragrances{" "}
-              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
-                {" "}
-                5 товара
-              </span>
-            </h1>
-            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
-              Skincare{" "}
-              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
-                {" "}
-                5 товара
-              </span>
-            </h1>
-            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
-              Groceries{" "}
-              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
-                {" "}
-                5 товара
-              </span>
-            </h1>
-            <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
-              Home Decoration{" "}
-              <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
-                {" "}
-                5 товара
-              </span>
-            </h1>
+            <Link href={"#smartphones"}>
+              <h1
+                className="text-black text-3xl font-semibold mb-4 cursor-pointer"
+                onClick={() => setActive(!active)}
+              >
+                Smartphones{" "}
+                <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                  {" "}
+                  5 товара
+                </span>
+              </h1>
+            </Link>
+            <Link href={"#laptops"}>
+              <h1
+                className="text-black text-3xl font-semibold mb-4 cursor-pointer"
+                onClick={() => setActive(!active)}
+              >
+                Laptops{" "}
+                <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                  {" "}
+                  5 товара
+                </span>
+              </h1>
+            </Link>
+            <Link href={"#fragrances"}>
+              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" onClick={() => setActive(!active)}>
+                Fragrances{" "}
+                <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                  {" "}
+                  5 товара
+                </span>
+              </h1>
+            </Link>
+            <Link href={"#skincare"}>
+              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer">
+                Skincare{" "}
+                <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                  {" "}
+                  5 товара
+                </span>
+              </h1>
+            </Link>
+            <Link href={"#groceries"}>
+              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" onClick={() => setActive(!active)}>
+                Groceries{" "}
+                <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                  {" "}
+                  5 товара
+                </span>
+              </h1>
+            </Link>
+            <Link href={"#decoration"}>
+              <h1 className="text-black text-3xl font-semibold mb-4 cursor-pointer" onClick={() => setActive(!active)}>
+                Home Decoration{" "}
+                <span className="bg-[#7000FF] rounded-md text-base text-white font-normal px-2 py-[2px] ">
+                  {" "}
+                  5 товара
+                </span>
+              </h1>
+            </Link>
           </div>
         </div>
         <div

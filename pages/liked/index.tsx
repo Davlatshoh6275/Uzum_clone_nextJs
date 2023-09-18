@@ -11,6 +11,7 @@ export default function Liked() {
   const [data, setData] = useState<any[]>([]);
   const [arrID, setArrId] = useState([]);
   const [arr, setArr] = useState([]);
+  const [update, setUpdate] = useState(0);
 
   useEffect(() => {
     let arrId = JSON.parse(localStorage.getItem("id") || "[]");
@@ -23,7 +24,7 @@ export default function Liked() {
   
   return (
     <div>
-      <Navbar />
+      <Navbar update={update} />
       {data.length !== 0 ? (
         <h1 className="sm:px-4  md:px-10 lg:px-14 xl:px-24 text-black text-3xl  sm:text-3xl font-semibold mb-10 ">
           Избранное

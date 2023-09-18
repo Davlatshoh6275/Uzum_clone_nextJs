@@ -9,8 +9,7 @@ const Carzin: React.FC = () => {
   const [prices, setPrices] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [real, setReal] = useState(0);
-
-  
+  const [update, setUpdate] = useState(data.length);
 
   useEffect(() => {
     let a = JSON.parse(localStorage.getItem("karzine") || "[]");
@@ -39,29 +38,58 @@ const Carzin: React.FC = () => {
 
     setPrices(arrPrice);
     setData(a);
+    setUpdate(a.length);
   }, []);
 
   const deleteItem = (id: any) => {
-    let a = data.filter((item) => item.id !== id);
+    let d = data.filter((item) => item.id !== id);
     let b = prices.filter((item) => item.id !== id);
-    setData(a);
+    setData(d);
     setPrices(b);
-    localStorage.setItem("karzine", JSON.stringify(a));
+    localStorage.setItem("karzine", JSON.stringify(d));
     localStorage.setItem("prices", JSON.stringify(b));
+
+    let a = JSON.parse(localStorage.getItem("karzine") || "[]");
+    let arrPrice = JSON.parse(localStorage.getItem("prices") || "[]");
+    let o = [];
+    let k = [];
+
+    if (arrPrice.length !== 0) {
+      for (let i = 0; i < arrPrice.length; i++) {
+        o.push(arrPrice[i].price);
+        k.push(arrPrice[i].realPrice);
+      }
+
+      let t = o.reduce((prev, item) => {
+        return (prev += item);
+      });
+
+      let g = k.reduce((prev, item) => {
+        return (prev += item);
+      });
+
+      let y = g - t;
+      setTotal(t);
+      setReal(y);
+    }
+
+    setPrices(arrPrice);
+    setData(a);
+    setUpdate(update - 1);
   };
 
   return (
     <div>
-      <Navbar />
+      <Navbar update={update} />
       <div className="w-[100%] m-0 mx-auto sm:px-4  md:px-10 lg:px-14 xl:px-28 mb-6 ">
-        <h1 className="text-black text-3xl font-semibold mt-5 mb-6 ">
+        <h1 className="ml-5 text-black text-3xl font-semibold mt-5 mb-6 ">
           Корзина товаров
         </h1>
         {data.length !== 0 ? (
           <div className="flex flex-col gap-4 p-4 sm:flex-col  sm:gap-4 lg:flex lg:flex-row ">
             <div className=" w-full sm:w-full  lg:w-3/4 h-full border-2 borsder-solid border-[#D9D9D9] rounded-2xl px-9 py-11 ">
               {data.map((item: any) => (
-                <div key={item.id} >
+                <div key={item.id}>
                   <Item
                     item={item}
                     deleteItem={deleteItem}

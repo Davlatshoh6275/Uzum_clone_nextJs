@@ -35,7 +35,7 @@ export default function Item(props: any) {
       realPrice: item.price,
     });
 
-    cartUpdate(!update);
+    cartUpdate(update + 1);
 
     localStorage.setItem("karzine", JSON.stringify(karzine));
     localStorage.setItem("prices", JSON.stringify(prices));

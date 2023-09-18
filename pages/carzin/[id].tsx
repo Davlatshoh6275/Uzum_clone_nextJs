@@ -45,19 +45,19 @@ export default function Item(props: any) {
     localStorage.setItem("karzine", JSON.stringify(data));
   };
   return (
-    <div key={key} className="flex items-center gap-4  mb-4 ">
-      <div className="border border-solid border-[#FEFEFE] rounded-xl">
+    <div key={key} className="w-full flex-col sm:flex sm:flex-row   md:flex md:items-center gap-4  mb-4 ">
+      <div className="border h-80 md:h-full md:w-40 border-solid border-[#FEFEFE] rounded-xl">
         <img
           src={item.images[0]}
           alt=""
-          className="w-40 h-48 rounded-xl object-cover object-center  "
+          className="h-72  md:w-full md:h-48 rounded-xl object-cover object-center  "
         />
       </div>
-      <div className="flex flex-col gap-2 ">
-        <p className="text-black font-normal text-base lg:text-xl lg:font-medium lg:w-2/3 ">
+      <div className="flex flex-col gap-2 md:w-2/4 lg:w-5/6 ">
+        <p className=" w-full text-black font-normal text-base lg:text-xl lg:font-medium lg:w-2/3 ">
           {item.description}
         </p>
-        <h2 className="text-black text-base font-bold ">{a} $</h2>
+        <h2 className="text-black text-3xl md:text-base  font-bold ">{a} $</h2>
         <div className="w-full md:w-20 h-8 rounded border border-solid border-[#ACACAC] flex justify-around items-center  ">
           <button
             disabled={count <= 1}
