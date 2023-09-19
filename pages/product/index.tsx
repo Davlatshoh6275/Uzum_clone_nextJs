@@ -2,7 +2,7 @@
 const index: React.FC = ({ users }: any) => {
 	return (
 		<div>
-			<h1>USERS</h1>
+			<h1>Product</h1>
 			
 		</div>
 	);

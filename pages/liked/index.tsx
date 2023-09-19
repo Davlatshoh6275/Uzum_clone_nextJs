@@ -14,16 +14,17 @@ export default function Liked() {
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("liked") || "[]");
     setData(data);
+    let a = JSON.parse(localStorage.getItem("karzine") || "[]");
+    setUpdate(a.length);
   }, []);
 
-  const delLiked = (item: any ) => {
-    let a = dataArr.filter(i => i.id !== item.id)
+  const delLiked = (item: any) => {
+    let a = dataArr.filter((i) => i.id !== item.id);
 
     localStorage.setItem("liked", JSON.stringify(a));
-    
-    setData(a)
-  }
-   
+
+    setData(a);
+  };
 
   return (
     <div>
@@ -39,20 +40,19 @@ export default function Liked() {
       <div className="grid grid-flow-row-dense sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-5  sm:px-4  md:px-10 lg:px-14 xl:px-24 gap-4 mb-5 ">
         {dataArr.length !== 0 ? (
           dataArr.map((item: any) => (
-            <div key={item.id} className=" h-full w-82 rounded-xl p-5 mb-5 border-2 border-solid border-[#E5E7EB] ">
+            <div
+              key={item.id}
+              className=" h-full w-82 rounded-xl p-5 mb-5 border-2 border-solid border-[#E5E7EB] "
+            >
               <div className="relative">
                 <Link href={`/product/${item.id}`} className="z-0">
                   <div className=" h-72  mb-3 relative ">
-                    <img
-                      src={item.images[0]}
-                      alt="img"
-                      className="h-full"
-                    />
+                    <img src={item.images[0]} alt="img" className="h-full" />
                   </div>
                 </Link>
                 <AiOutlineHeart
                   className={`cursor-pointer absolute top-2 text-2xl right-2  z-100 `}
-                  color='red'
+                  color="red"
                   onClick={() => delLiked(item)}
                 />
               </div>

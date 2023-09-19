@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Item from "@/components/Item";
 
@@ -37,6 +37,12 @@ const UserPage: React.FC = ({ data, array }: any) => {
   const [count, setCount] = useState(1);
   const [itemPrice, setItemPrice] = useState(data.price);
   const [skidka, setSkidka] = useState(a);
+  const [update, setUpdate] = useState(data.length);
+
+  useEffect(() => {
+    let a = JSON.parse(localStorage.getItem("karzine") || "[]");
+    setUpdate(a.length);
+  }, []);
 
   const plusItemCount = () => {
     setCount(count + 1);
@@ -77,7 +83,7 @@ const UserPage: React.FC = ({ data, array }: any) => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar update={update} />
       <div className="w-[100%] mt-10 mx-auto sm:px-4  md:px-10 lg:px-14 xl:px-24 ">
         <div className="w-full flex-col lg:flex  lg:flex-row lg:justify-center lg:gap-14 mb-24 ">
           <div className=" w-[90%]  h-1/3 mx-auto lg:mx-0 lg:w-1/3 lg:h-[500px] ">

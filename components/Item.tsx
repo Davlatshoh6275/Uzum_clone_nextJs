@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
+import { BsCartCheckFill } from "react-icons/bs";
 import Link from "next/link";
 
 export default function Item(props: any) {
   const { item, cartUpdate, update } = props;
   const [isLiked, setIsLiked] = useState<any>(false);
+  const [isInCard, setIsInCard] = useState<any>(false);
   const [active, setActive] = useState<any>(false);
-  const [selectedData, setSelectedData] = useState([]);
   let a = 0;
 
   function persantagePrice() {
@@ -20,10 +21,17 @@ export default function Item(props: any) {
 
   useEffect(() => {
     let a = JSON.parse(localStorage.getItem("liked") || "[]");
+    let b = JSON.parse(localStorage.getItem("karzine") || "[]");
 
     for (let i = 0; i < a.length; i++) {
       if (a[i].id === item.id) {
         setIsLiked(true);
+      }
+    }
+
+    for (let i = 0; i < b.length; i++) {
+      if (b[i].id === item.id) {
+        setIsInCard(true);
       }
     }
   }, []);
@@ -69,6 +77,7 @@ export default function Item(props: any) {
     }
 
     setActive(!active);
+    setIsInCard(!isInCard);
   };
 
   persantagePrice();
@@ -118,12 +127,21 @@ export default function Item(props: any) {
                   {a} сум
                 </h3>
               </div>
-              <div className="" aria-disabled={true}>
-                <CgShoppingCart
-                  className="border border-solid border-[#ACACAC] text-[32px] rounded-full p-2 cursor-pointer "
-                  onClick={() => itemCarzine(item)}
-                />
-              </div>
+              {isInCard ? (
+                <div className="" aria-disabled={true}>
+                  <BsCartCheckFill
+                    className="border border-solid border-[#ACACAC] text-[32px] rounded-full p-2 cursor-pointer "
+                    onClick={() => itemCarzine(item)}
+                  />
+                </div>
+              ) : (
+                <div className="" aria-disabled={true}>
+                  <CgShoppingCart
+                    className="border border-solid border-[#ACACAC] text-[32px] rounded-full p-2 cursor-pointer "
+                    onClick={() => itemCarzine(item)}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
